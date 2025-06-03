@@ -45,6 +45,7 @@ const app = express();
 // Initialize McpAuthServer with baseUrl
 const mcpAuthServer = new McpAuthServer({
   baseUrl: process.env.BASE_URL as string,
+  issuer: process.env.ISSUER as string
 });
 
 app.use(express.json());
@@ -65,7 +66,10 @@ Creates a new instance of the MCP authentication server with the given configura
 ```typescript
 import {McpAuthServer} from '@asgardeo/mcp-express';
 
-const mcpAuthServer = new McpAuthServer({baseUrl: 'https://auth.example.com'});
+const mcpAuthServer = new McpAuthServer({
+  baseUrl: 'https://auth.example.com',
+  issuer: 'https://auth.example.com/oauth2/token'
+});
 ```
 
 #### mcpAuthServer.router()
@@ -95,6 +99,8 @@ The server can be configured with the following option:
 interface McpAuthServerOptions {
   /** Base URL of the authorization server */
   baseUrl: string;
+  /** Issuer of the authorization server */
+  issuer: string;
 }
 ```
 
@@ -119,6 +125,7 @@ const app: Express = express();
 // Initialize McpAuthServer
 const mcpAuthServer = new McpAuthServer({
   baseUrl: process.env.BASE_URL as string,
+  issuer: process.env.ISSUER as string,
 });
 
 app.use(express.json());
